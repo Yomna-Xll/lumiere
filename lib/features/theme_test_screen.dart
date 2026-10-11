@@ -19,11 +19,26 @@ class ThemeTestScreen extends StatelessWidget {
             const SizedBox(height: 16),
             const Text('Plain text with no style'),
             const SizedBox(height: 16),
-            const TextField(),
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+                hintText: 'Enter your email',
+              ),
+            ),
             const SizedBox(height: 16),
-            ElevatedButton(
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+                errorText:
+                    'Email not verified, please verify your email first.',
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(onPressed: () {}, child: const Text('Login')),
+            const SizedBox(height: 16),
+            OutlinedButton(
               onPressed: () {},
-              child: const Text('Login'),
+              child: const Text('Continue with Google'),
             ),
           ],
         ),
