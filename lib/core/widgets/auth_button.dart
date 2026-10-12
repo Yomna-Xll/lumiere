@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class AuthButton extends StatelessWidget {
@@ -36,3 +34,9 @@ class AuthButton extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
