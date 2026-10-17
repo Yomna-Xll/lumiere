@@ -6,7 +6,8 @@ class PasswordTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String labelText;
   final String hintText;
-  final String? Function(String?)? validator;
+  final String? errorText;
+  final String? helperText;
   final ValueChanged<String>? onChanged;
 
   const PasswordTextField({
@@ -14,16 +15,17 @@ class PasswordTextField extends StatefulWidget {
     this.controller,
     this.labelText = 'Password',
     this.hintText = '••••••••',
-    this.validator,
+    this.errorText,
+    this.helperText,
     this.onChanged,
   });
 
   @override
-  State<PasswordTextField> createState() => _PasswordTextFieldState();
+  State<PasswordTextField> createState() => PasswordTextFieldState();
 }
 
-class _PasswordTextFieldState extends State<PasswordTextField> {
-  bool _obscureText = true;
+class PasswordTextFieldState extends State<PasswordTextField> {
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +33,20 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       controller: widget.controller,
       labelText: widget.labelText,
       hintText: widget.hintText,
-      obscureText: _obscureText,
+      errorText: widget.errorText,
+      helperText: widget.helperText,
+      obscureText: obscureText,
       keyboardType: TextInputType.visiblePassword,
-      validator: widget.validator,
       onChanged: widget.onChanged,
       suffixIcon: IconButton(
         icon: Icon(
-          _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+          obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
           color: AppColors.textSecondary,
           size: 20,
         ),
         onPressed: () {
           setState(() {
-            _obscureText = !_obscureText;
+            obscureText = !obscureText;
           });
         },
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumiere/core/theme/app_theme.dart';
-import 'package:lumiere/features/theme_test_screen.dart';
+import 'package:lumiere/features/auth/ui/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: Scaffold(body: AuthTestScreen()),
+      home: Scaffold(body: LoginScreen()),
     );
   }
 }

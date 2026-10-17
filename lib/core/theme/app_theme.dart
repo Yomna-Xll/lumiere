@@ -35,7 +35,9 @@ class AppTheme {
         ),
 
         labelStyle: AppTextStyle.inputLabel,
-
+        helperStyle: AppTextStyle.helper,
+        helperMaxLines: 2,
+        errorMaxLines: 2,
         hintStyle: AppTextStyle.inputText.copyWith(color: AppColors.textHint),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -47,6 +49,14 @@ class AppTheme {
         ),
         errorStyle: AppTextStyle.helper.copyWith(color: AppColors.error),
       ),
+
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: AppColors.textPrimary,
+        contentTextStyle: AppTextStyle.body.copyWith(color: Colors.white),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.textPrimary,
