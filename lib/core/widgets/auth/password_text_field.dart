@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lumiere/core/theme/app_colors.dart';
-import 'package:lumiere/core/widgets/custom_text_field.dart';
+import 'package:lumiere/core/widgets/auth/custom_text_field.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController? controller;

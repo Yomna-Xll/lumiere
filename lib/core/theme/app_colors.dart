@@ -11,4 +11,6 @@ class AppColors {
   static const Color success = Color(0xFF2E7D32);
   static const Color textHint = Color(0xFF9E978E);
   static const Color textLabel = Color(0xFF5A534A);
+  static const Color backgroundAlt = Color(0xFFFCF9F4); 
+static const Color goldDark = Color(0xFF8A6A1F);     
 }

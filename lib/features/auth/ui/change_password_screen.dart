@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lumiere/core/utils/validators.dart';
-import 'package:lumiere/core/widgets/auth_button.dart';
-import 'package:lumiere/core/widgets/auth_scaffold.dart';
-import 'package:lumiere/core/widgets/password_text_field.dart';
-import 'package:lumiere/core/widgets/snack_bar.dart';
+import 'package:lumiere/core/widgets/auth/auth_button.dart';
+import 'package:lumiere/core/widgets/auth/auth_scaffold.dart';
+import 'package:lumiere/core/widgets/auth/password_text_field.dart';
+import 'package:lumiere/core/widgets/auth/snack_bar.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});

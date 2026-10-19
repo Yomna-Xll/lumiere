@@ -57,6 +57,16 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
 
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColors.background,
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: false,
+        titleTextStyle: AppTextStyle.headingMedium,
+        iconTheme: const IconThemeData(color: AppColors.textPrimary),
+      ),
+
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.textPrimary,

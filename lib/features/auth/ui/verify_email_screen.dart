@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lumiere/core/widgets/auth_button.dart';
-import 'package:lumiere/core/widgets/auth_header.dart';
-import 'package:lumiere/core/widgets/auth_scaffold.dart';
-import 'package:lumiere/core/widgets/otp_boxes.dart';
-import 'package:lumiere/core/widgets/resend_timer.dart';
+import 'package:lumiere/core/widgets/auth/auth_button.dart';
+import 'package:lumiere/core/widgets/auth/auth_header.dart';
+import 'package:lumiere/core/widgets/auth/auth_scaffold.dart';
+import 'package:lumiere/core/widgets/auth/otp_boxes.dart';
+import 'package:lumiere/core/widgets/auth/resend_timer.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key, required this.email});

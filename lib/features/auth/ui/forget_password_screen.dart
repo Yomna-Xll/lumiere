@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lumiere/core/utils/validators.dart';
-import 'package:lumiere/core/widgets/auth_button.dart';
-import 'package:lumiere/core/widgets/auth_header.dart';
-import 'package:lumiere/core/widgets/auth_scaffold.dart';
-import 'package:lumiere/core/widgets/custom_text_field.dart';
+import 'package:lumiere/core/widgets/auth/auth_button.dart';
+import 'package:lumiere/core/widgets/auth/auth_header.dart';
+import 'package:lumiere/core/widgets/auth/auth_scaffold.dart';
+import 'package:lumiere/core/widgets/auth/custom_text_field.dart';
 import 'package:lumiere/features/auth/ui/reset_code_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
