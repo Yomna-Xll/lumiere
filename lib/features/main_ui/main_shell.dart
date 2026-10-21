@@ -9,10 +9,10 @@ class MainShell extends StatefulWidget {
   const MainShell({super.key});
 
   @override
-  State<MainShell> createState() => _MainShellState();
+  State<MainShell> createState() => MainShellState();
 }
 
-class _MainShellState extends State<MainShell> {
+class MainShellState extends State<MainShell> {
   int index = 0;
 
   @override

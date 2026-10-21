@@ -19,6 +19,6 @@ class SessionExpiredScreen extends StatelessWidget {
           (route) => false,
         ),
       ),
-    );
+    ); 
   }
 }

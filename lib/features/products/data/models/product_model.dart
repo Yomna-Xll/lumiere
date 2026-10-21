@@ -3,6 +3,7 @@ class ProductModel {
   final String name;
   final String description;
   final String coverPictureUrl;
+  final List<String> productPictures;
   final double price;
   final int stock;
   final double weight;
@@ -17,6 +18,7 @@ class ProductModel {
     required this.name,
     required this.description,
     required this.coverPictureUrl,
+    required this.productPictures,
     required this.price,
     required this.stock,
     required this.weight,
@@ -32,23 +34,23 @@ class ProductModel {
   bool get isLowStock => stock > 0 && stock <= 10;
   double get finalPrice => price * (1 - discountPercentage / 100);
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      description: json['description'] as String? ?? '',
-      coverPictureUrl: json['coverPictureUrl'] as String? ?? '',
-      price: (json['price'] as num).toDouble(),
-      stock: (json['stock'] as num).toInt(),
-      weight: (json['weight'] as num?)?.toDouble() ?? 0,
-      color: json['color'] as String? ?? '',
-      rating: (json['rating'] as num?)?.toDouble() ?? 0,
-      reviewsCount: (json['reviewsCount'] as num?)?.toInt() ?? 0,
-      discountPercentage:
-          (json['discountPercentage'] as num?)?.toDouble() ?? 0,
-      categories: (json['categories'] as List<dynamic>? ?? [])
-          .map((e) => e.toString())
-          .toList(),
-    );
-  }
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+    id: json['id'] as String,
+    name: json['name'] as String? ?? '',
+    description: json['description'] as String? ?? '',
+    coverPictureUrl: json['coverPictureUrl'] as String? ?? '',
+    productPictures: (json['productPictures'] as List<dynamic>? ?? [])
+        .map((e) => e.toString())
+        .toList(),
+    price: (json['price'] as num?)?.toDouble() ?? 0,
+    stock: (json['stock'] as num?)?.toInt() ?? 0,
+    weight: (json['weight'] as num?)?.toDouble() ?? 0,
+    color: json['color'] as String? ?? '',
+    rating: (json['rating'] as num?)?.toDouble() ?? 0,
+    reviewsCount: (json['reviewsCount'] as num?)?.toInt() ?? 0,
+    discountPercentage: (json['discountPercentage'] as num?)?.toDouble() ?? 0,
+    categories: (json['categories'] as List<dynamic>? ?? [])
+        .map((e) => e.toString())
+        .toList(),
+  );
 }

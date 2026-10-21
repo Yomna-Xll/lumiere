@@ -1,48 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lumiere/core/theme/app_colors.dart';
 import 'package:lumiere/core/utils/formatters.dart';
-import 'package:lumiere/core/widgets/products/product_card.dart';
-import 'package:lumiere/core/widgets/products/product_grid.dart';
-import 'package:lumiere/core/widgets/state_view.dart';
-import 'package:lumiere/features/products/ui/product_details_screen.dart';
-import 'package:lumiere/sample_products.dart';
+import 'package:lumiere/core/widgets/products/products_view.dart';
+import 'package:lumiere/features/categories/data/category_model.dart';
+import 'package:lumiere/features/products/cubit/products_cubit.dart';
+import 'package:lumiere/features/products/data/products_repository.dart';
 
 class CategoryProductsScreen extends StatelessWidget {
-  final String category;
+  final CategoryModel category;
 
   const CategoryProductsScreen({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    final products =
-        sampleProducts.where((p) => p.categories.contains(category)).toList();
-
-    return Scaffold(
-      backgroundColor: AppColors.backgroundAlt,
-      appBar: AppBar(
+    return BlocProvider(
+      create: (context) => ProductsCubit(
+        context.read<ProductsRepository>(),
+        category: category.name, 
+      )..load(),
+      child: Scaffold(
         backgroundColor: AppColors.backgroundAlt,
-        title: Text(Formatters.capitalize(category)),
+        appBar: AppBar(
+          backgroundColor: AppColors.backgroundAlt,
+          title: Text(Formatters.capitalize(category.name)),
+        ),
+        body: BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) => ProductsView(
+            state: state,
+            onReload: () => context.read<ProductsCubit>().load(),
+            onLoadMore: () => context.read<ProductsCubit>().loadMore(),
+          ),
+        ),
       ),
-      body: products.isEmpty
-          ?  StateView(
-              icon: Icons.diamond_outlined,
-              title: 'No products found',
-            )
-          : ProductGrid(
-              itemCount: products.length,
-              itemBuilder: (_, i) {
-                final product = products[i];
-                return ProductCard(
-                  product: product,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ProductDetailsScreen(product: product),
-                    ),
-                  ),
-                );
-              },
-            ),
     );
   }
 }

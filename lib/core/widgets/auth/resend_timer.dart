@@ -33,7 +33,7 @@ class ResendTimerState extends State<ResendTimer> {
           remainingSeconds--;
         });
       } else {
-        timer?.cancel();
+        timer.cancel();
       }
     });
   }

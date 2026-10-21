@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lumiere/core/theme/app_colors.dart';
 import 'package:lumiere/core/widgets/app_search_field.dart';
-import 'package:lumiere/core/widgets/products/product_card.dart';
-import 'package:lumiere/core/widgets/products/product_grid.dart';
+import 'package:lumiere/core/widgets/products/products_view.dart';
 import 'package:lumiere/core/widgets/state_view.dart';
-import 'package:lumiere/features/products/data/models/product_model.dart';
-import 'package:lumiere/features/products/ui/product_details_screen.dart';
-import 'package:lumiere/sample_products.dart';
+import 'package:lumiere/features/products/cubit/products_cubit.dart';
+import 'package:lumiere/features/products/data/products_repository.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => SearchScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          ProductsCubit(context.read<ProductsRepository>(), startIdle: true),
+      child: const SearchView(),
+    );
+  }
 }
 
-class SearchScreenState extends State<SearchScreen> {
+class SearchView extends StatefulWidget {
+  const SearchView();
+
+  @override
+  State<SearchView> createState() => SearchViewState();
+}
+
+class SearchViewState extends State<SearchView> {
   final controller = TextEditingController();
-  String query = '';
 
   @override
   void dispose() {
@@ -25,48 +36,9 @@ class SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  List<ProductModel> get results {
-    final q = query.trim().toLowerCase();
-    if (q.isEmpty) return [];
-    return sampleProducts
-        .where((p) => p.name.toLowerCase().contains(q))
-        .toList();
-  }
-
-  Widget buildBody() {
-    if (query.trim().isEmpty) {
-      return  StateView(
-        icon: Icons.search,
-        title: 'Search our collection',
-        subtitle: 'Find jewelry, charms and more',
-      );
-    }
-    final results = this.results;
-    if (results.isEmpty) {
-      return  StateView(
-        icon: Icons.search_off,
-        title: 'No results for your search',
-      );
-    }
-    return ProductGrid(
-      itemCount: results.length,
-      itemBuilder: (_, i) {
-        final product = results[i];
-        return ProductCard(
-          product: product,
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => ProductDetailsScreen(product: product),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ProductsCubit>();
     return Scaffold(
       backgroundColor: AppColors.backgroundAlt,
       appBar: AppBar(
@@ -79,11 +51,29 @@ class SearchScreenState extends State<SearchScreen> {
             padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
             child: AppSearchField(
               controller: controller,
-              onChanged: (value) => setState(() => query = value),
-              onClear: () => setState(() => query = ''),
+              onChanged: cubit.search,
+              onClear: () => cubit.search(''),
             ),
           ),
-          Expanded(child: buildBody()),
+          Expanded(
+            child: BlocBuilder<ProductsCubit, ProductsState>(
+              builder: (context, state) {
+                if (state.status == ProductsStatus.idle) {
+                  return  StateView(
+                    icon: Icons.search,
+                    title: 'Search our collection',
+                    subtitle: 'Find jewelry, charms and more',
+                  );
+                }
+                return ProductsView(
+                  state: state,
+                  emptyTitle: 'No results for your search',
+                  onReload: () => cubit.search(controller.text),
+                  onLoadMore: cubit.loadMore,
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
