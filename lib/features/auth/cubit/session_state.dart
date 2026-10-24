@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:lumiere/features/auth/data/user_model.dart';
 
-sealed class SessionState extends Equatable {
+sealed class SessionState extends Equatable {    
   const SessionState();
 
   @override

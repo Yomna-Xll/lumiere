@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:lumiere/core/network/api_error.dart';
+ import 'package:lumiere/core/network/api_error.dart';
 
 enum AuthAction {
   login,
@@ -22,6 +22,8 @@ sealed class AuthState extends Equatable {
 class AuthInitial extends AuthState {
   const AuthInitial();
 }
+
+
 
 class AuthLoading extends AuthState {
   final AuthAction action;
